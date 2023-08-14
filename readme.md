@@ -1,6 +1,7 @@
 # Copy to Clipboard
 
-Small (~600 bytes minified+gzipped) script for copying text to the clipboard.
+Small (~600 bytes [minified](https://github.com/clairelizbet/copy-to-clipboard/releases/latest)+gzipped)
+script for copying text to the clipboard.
 
 It prefers the modern [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText)
 and falls back to the deprecated [execCommand](https://developer.mozilla.org/en-US/docs/Web/API/document/execCommand)
