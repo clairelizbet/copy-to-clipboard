@@ -1,0 +1,15 @@
+{
+  "name": "copy-to-clipboard",
+  "version": "1.0.0",
+  "description": "A perfectly cromulent copy to clipboard script",
+  "scripts": {
+    "compile-minified": "tsc && terser dist/clipboard.js -o dist/clipboard.min.js -cm",
+    "gzip-stats": "rm -f dist/*.gz && gzip -9k dist/clipboard.min.js && ls dist/ -l",
+    "build": "npm run compile-minified && npm run gzip-stats"
+  },
+  "author": "claire (https://clairecampbell.io)",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "terser": "^5.19.2"
+  }
+}
