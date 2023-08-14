@@ -7,27 +7,44 @@ It prefers the modern [Clipboard API](https://developer.mozilla.org/en-US/docs/W
 and falls back to the deprecated [execCommand](https://developer.mozilla.org/en-US/docs/Web/API/document/execCommand)
 method as needed.
 
+## Installation
+
+Available [from NPM](https://www.npmjs.com/package/@clairelizbet/copy-to-clipboard)
+
+```sh
+npm install @clairelizbet/copy-to-clipboard
+```
+
+You can also find the latest compiled and minified version on the current
+[release page](https://github.com/clairelizbet/copy-to-clipboard/releases/latest).
+
 ## Usage
 
-If you wanted to copy the value "Springfield" to the clipboard,
-here's how you would do that:
+The script is written as a module, with `copyToClipboard` as its sole named
+export. Most of the time,
+
+```js
+import { copyToClipboard } from "@clairelizbet/copy-to-clipboard"
+```
+
+The `copyToClipboard` method is asynchronous and may throw an Error.
+
+If the Error will be handled (e.g. by an error boundary) and you do not need to
+wait for the copy operation to complete, you can just call it.
 
 ```js
 /**
- * copyToClipboard is asynchronous and may throw an Error.
- * If the Error will be handled (e.g. by an error boundary) and you do not
- * need to wait for the copy operation to complete, you can just call it.
+ * Copy the value "Springfield" to the clipboard
  */
-
 copyToClipboard("Springfield")
 
 // The copy operation is not guaranteed to be complete at this point.
 // Some of this block may never be reached if an Error is thrown.
+```
 
-/**
- * In many cases you will want to handle the async copy operation as a Promise.
- */
+Most of the time, you'll want to handle the async copy operation as a Promise.
 
+```js
 copyToClipboard("Springfield")
   .then(() => {
     // Copy operation has succeeded at this point
@@ -35,11 +52,12 @@ copyToClipboard("Springfield")
   .catch((copyError) => {
     // Copy operation has failed at this point
   })
+```
 
-/**
- * Or, by calling it from an async function and using await.
- */
+If you're calling `copyToClipboard` from an async function, you could also use
+async/await.
 
+```js
 try {
   await copyToClipboard("Springfield")
 } catch (copyError) {
