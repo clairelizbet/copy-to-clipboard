@@ -21,7 +21,7 @@ You can also find the latest compiled and minified version on the current
 ## Usage
 
 The script is written as a module, with `copyToClipboard` as its sole named
-export. Most of the time,
+export.
 
 ```js
 import { copyToClipboard } from "@clairelizbet/copy-to-clipboard"
