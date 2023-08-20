@@ -1,6 +1,6 @@
 {
   "name": "@clairelizbet/copy-to-clipboard",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A perfectly cromulent copy to clipboard script",
   "scripts": {
     "compile-minified": "tsc && terser dist/clipboard.js -o dist/clipboard.min.js -cm",
@@ -8,10 +8,15 @@
     "build": "npm run compile-minified && npm run gzip-stats"
   },
   "main": "dist/clipboard.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clairelizbet/copy-to-clipboard.git"
+  },
   "files": [
     "clipboard.ts",
     "dist/clipboard.js",
     "dist/clipboard.js.map",
+    "dist/clipboard.min.js",
     "dist/clipboard.d.ts"
   ],
   "author": "claire (https://github.com/clairelizbet)",
