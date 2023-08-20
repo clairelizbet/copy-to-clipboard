@@ -44,7 +44,7 @@ export function copyToClipboard(text: string): Promise<void> {
  *
  * @deprecated navigator.clipboard is recommended instead, when available
  */
-async function copyToClipboardViaSelection(text: string): Promise<void> {
+export async function copyToClipboardViaSelection(text: string): Promise<void> {
   /**
    * Attempt to get a Selection object to be used for selecting the content of
    * a dynamically created text node.

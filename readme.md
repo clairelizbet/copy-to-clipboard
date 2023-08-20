@@ -20,14 +20,17 @@ You can also find the latest compiled and minified version on the current
 
 ## Usage
 
-The script is written as a module, with `copyToClipboard` as its sole named
-export.
+The script is written as a module, with named exports.
+
+- `copyToClipboard(text: string)` - Copies using the best available method (Clipboard or Selection API)
+- `copyToClipboardViaSelection(text: string)` - Copies using the legacy Selection API
 
 ```js
 import { copyToClipboard } from "@clairelizbet/copy-to-clipboard"
+import { copyToClipboardViaSelection } from "@clairelizbet/copy-to-clipboard"
 ```
 
-The `copyToClipboard` method is asynchronous and may throw an Error.
+The `copyToClipboard` and `copyToClipboardViaSelection` methods are asynchronous and may throw an Error.
 
 If the Error will be handled (e.g. by an error boundary) and you do not need to
 wait for the copy operation to complete, you can just call it.
@@ -37,6 +40,14 @@ wait for the copy operation to complete, you can just call it.
  * Copy the value "Springfield" to the clipboard
  */
 copyToClipboard("Springfield")
+
+/**
+ * Or, you can use the legacy method directly. This is generally
+ * not recommended, but can be useful in some situations.
+ *
+ * It has the same signature and returns a Promise, just like copyToClipboard.
+ */
+copyToClipboardViaSelection("Springfield")
 
 // The copy operation is not guaranteed to be complete at this point.
 // Some of this block may never be reached if an Error is thrown.
