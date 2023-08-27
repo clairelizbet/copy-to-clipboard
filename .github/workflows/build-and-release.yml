@@ -1,8 +1,9 @@
 name: Build and publish release
+
 on:
   push:
     tags:
-      - "v?[0-9].[0-9].[0-9]"
+      - "v?[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   build-and-release:
@@ -13,11 +14,16 @@ jobs:
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
+
       - run: npm ci
       - run: npm run build
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - run: sudo apt-get install -y zip
+      - run: zip -r dist.zip dist
+
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,8 +33,6 @@ jobs:
             --repo="$GITHUB_REPOSITORY" \
             --title="Version ${tag#v}" \
             --notes "Compiled to a JavaScript ES6 module and minified. $(stat -c%s dist/clipboard.min.js.gz) bytes gzipped over the wire" \
-            "${GITHUB_WORKSPACE}/clipboard.ts" \
-            "${GITHUB_WORKSPACE}/dist/clipboard.d.ts" \
-            "${GITHUB_WORKSPACE}/dist/clipboard.js" \
-            "${GITHUB_WORKSPACE}/dist/clipboard.js.map" \
-            "${GITHUB_WORKSPACE}/dist/clipboard.min.js"
+            "${GITHUB_WORKSPACE}/dist.zip" \
+            "${GITHUB_WORKSPACE}/dist/clipboard.min.js" \
+            "${GITHUB_WORKSPACE}/dist/clipboard.min.js.gz"
