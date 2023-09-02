@@ -3,9 +3,9 @@
   "version": "1.3.1",
   "description": "A perfectly cromulent copy to clipboard script",
   "scripts": {
-    "build": "playwright install --with-deps && npm run compile-minified && npm run gzip && npm run link",
+    "build": "npm run compile-minified && npm run gzip && npm run link",
     "link": "npm link && cd test/pkg && npm link @clairelizbet/copy-to-clipboard",
-    "test": "concurrently -s last -k --kill-signal SIGKILL \"npm:start:server\" \"playwright test\"",
+    "test": "npm run link && concurrently -s last -k --kill-signal SIGKILL \"npm:start:server\" \"playwright test\"",
     "start:server": "cd test/pkg && npm run start:secure",
     "compile-minified": "tsc && terser dist/clipboard.js -o dist/clipboard.min.js -cm",
     "gzip": "rm -f dist/*.gz && gzip -9k dist/clipboard.min.js"
