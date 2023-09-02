@@ -1,0 +1,16 @@
+@import "npm:@clairelizbet/primer";
+
+:root {
+  --content-width: 640px;
+}
+
+body {
+  background-color: hsl(256, 100%, 16%);
+  color: hsl(0, 0%, 100%);
+}
+
+main {
+  margin: 0 auto;
+  padding: 1em;
+  max-width: var(--content-width);
+}
