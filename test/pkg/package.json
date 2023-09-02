@@ -1,0 +1,17 @@
+{
+  "name": "package-consumer",
+  "version": "1.0.0",
+  "private": true,
+  "files": [],
+  "scripts": {
+    "build": "parcel build --no-cache --public-url . index.html",
+    "start": "parcel serve --port 8080 --no-cache index.html",
+    "start:secure": "parcel serve --port 4443 --https --no-cache --no-hmr index.html"
+  },
+  "dependencies": {
+    "@clairelizbet/primer": "^1.0.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  }
+}

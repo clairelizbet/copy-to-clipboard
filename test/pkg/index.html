@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clipboard Copy Test</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Clipboard Copy Test</h1>
+
+      <p>
+        This page is for verifying that the copy-to-clipboard package is
+        installable and works correctly.
+      </p>
+
+      <p><button id="springfield">Copy "Springfield" to clipboard</button></p>
+
+      <p>
+        <button id="sanfrancisco">Copy "San Francisco" to clipboard</button>
+      </p>
+
+      <div class="paste-target" contenteditable>Garbage</div>
+
+      <script type="module" src="main.ts"></script>
+    </main>
+  </body>
+</html>

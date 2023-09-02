@@ -114,7 +114,7 @@ export async function copyToClipboardViaSelection(text: string): Promise<void> {
   selection.removeAllRanges()
 
   priorSelectionRanges.forEach((priorSelectionRange) =>
-    selection.addRange(priorSelectionRange)
+    selection.addRange(priorSelectionRange),
   )
 
   /**

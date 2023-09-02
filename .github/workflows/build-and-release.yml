@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: clairelizbet/action-build@v1
+      - uses: clairelizbet/action-test@v1
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
