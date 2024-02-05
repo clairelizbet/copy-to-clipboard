@@ -22,7 +22,7 @@ test("Copy", async ({ page }) => {
 
   expect(
     await page.evaluate(
-      () => document.querySelector(".paste-target").textContent,
+      () => document.querySelector(".paste-target")?.textContent,
     ),
   ).toBe("Springfield")
 })
@@ -49,7 +49,7 @@ test("Copy using execCommand", async ({ page }) => {
 
   expect(
     await page.evaluate(
-      () => document.querySelector(".paste-target").textContent,
+      () => document.querySelector(".paste-target")?.textContent,
     ),
   ).toBe("San Francisco")
 })
@@ -63,10 +63,13 @@ test("Copy restores selection", async ({ page }) => {
 
   await page.evaluate(() => {
     const selection = window.getSelection()
+    if (!selection) throw new Error("Could not access selection API")
     selection.removeAllRanges()
 
     const range = document.createRange()
-    range.selectNode(document.querySelector("main > p:first-of-type"))
+    const pTag = document.querySelector("main > p:first-of-type")
+    if (!pTag) throw new Error("Could not find main paragraph")
+    range.selectNode(pTag)
     priorSelection = JSON.stringify(range.getBoundingClientRect())
     selection.addRange(range)
   })
@@ -77,6 +80,7 @@ test("Copy restores selection", async ({ page }) => {
   expect(
     await page.evaluate(() => {
       const selection = window.getSelection()
+      if (!selection) throw new Error("Could not access selection API")
       if (selection.rangeCount !== 1) return false
 
       const currentSelection = JSON.stringify(
