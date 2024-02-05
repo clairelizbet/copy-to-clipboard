@@ -9,10 +9,10 @@ jobs:
   build-and-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18.x"
+          node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
           cache: "npm"
 
@@ -31,18 +31,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - run: sudo apt-get install -y zip
-      - run: zip -r dist.zip dist
-
-      - name: Create release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
-        run: |
-          gh release create "$tag" \
-            --repo="$GITHUB_REPOSITORY" \
-            --title="Version ${tag#v}" \
-            --notes "Compiled to a JavaScript ES6 module and minified. $(stat -c%s dist/clipboard.min.js.gz) bytes gzipped over the wire" \
-            "${GITHUB_WORKSPACE}/dist.zip" \
-            "${GITHUB_WORKSPACE}/dist/clipboard.min.js" \
-            "${GITHUB_WORKSPACE}/dist/clipboard.min.js.gz"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ github.ref_name }}-${{ github.sha }}
+          retention-days: 1
+          path: dist/
